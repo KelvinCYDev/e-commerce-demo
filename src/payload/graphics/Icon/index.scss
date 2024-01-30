@@ -1,0 +1,22 @@
+
+
+
+.icon {
+  img {
+    max-height: 38px;
+    margin: auto;
+    filter: invert(1);
+  }
+  h1 {
+    margin: 3rem auto;
+    text-align: center;
+  }
+}
+
+[data-theme="dark"] {
+  .icon {
+    img{
+      filter: unset;
+    }
+  }
+}
