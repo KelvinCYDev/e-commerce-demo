@@ -20,14 +20,46 @@ Core features:
 
 ## Quick Start
 
+To spin up this example locally, follow the [Quick Start](#quick-start). Then [Connect Stripe](#connect-stripe) to enable payments, and [Seed](#seed) the database with a few products and pages.
+
 ### Development
 
-1. First [clone the repo](#clone) if you have not done so already
+1. First [clone the repo](#clone)
 1. `cd my-project && cp .env.example .env` to copy the example environment variables
 1. `yarn && yarn dev` to install dependencies and start the dev server
 1. `open http://localhost:3000` to open the app in your browser
 
-That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. To begin accepting payment, follow the [Stripe](#stripe) guide. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
+Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. To begin accepting payment, follow the [Stripe](#stripe) guide. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
+
+### Docker
+
+Alternatively, you can use [Docker](https://www.docker.com) to spin up this demo locally. To do so, follow these steps:
+
+1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
+1. Next run `docker-compose up`
+1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
+
+That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
+
+## Production
+
+To run Payload in production, you need to build and serve the Admin panel. To do so, follow these steps:
+
+1. Invoke the `payload build` script by running `yarn build` or `npm run build` in your project root. This creates a `./build` directory with a production-ready admin bundle.
+1. Finally run `yarn serve` or `npm run serve` to run Node in production and serve Payload from the `./build` directory.
+1. When you're ready to go live, see [Deployment](#deployment) for more details.
+
+### Deployment
+
+Before deploying your app, you need to:
+
+1. Switch [your Stripe account to live mode](https://stripe.com/docs/test-mode) and update your [Stripe API keys](https://dashboard.stripe.com/test/apikeys). See [Connect Stripe](#connect-stripe) for more details.
+1. Ensure your app builds and serves in production. See [Production](#production) for more details.
+
+## To-do lists
+- [ ] Flexible currency (Not fixed to USD)
+- [ ] Support information of product delivery
+- [ ] Inventory and sales record 
 
 ## How it works
 
@@ -255,37 +287,8 @@ If you prefer another front-end framework or would like to use Payload as a stan
 
 For more details on how setup a custom server, see the official [Custom Server Example](https://github.com/payloadcms/payload/tree/main/examples/custom-server).
 
-##  Development
-
-To spin up this example locally, follow the [Quick Start](#quick-start). Then [Connect Stripe](#connect-stripe) to enable payments, and [Seed](#seed) the database with a few products and pages.
-
-### Docker
-
-Alternatively, you can use [Docker](https://www.docker.com) to spin up this demo locally. To do so, follow these steps:
-
-1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
-1. Next run `docker-compose up`
-1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
-
-That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
-
 ### Seed
 
 To seed the database with a few products and pages you can run `yarn seed`. This demo also comes with a `GET /api/seed` endpoint you can use to seed the database from the admin panel.
 
 > NOTICE: seeding the database is destructive because it drops your current database to populate a fresh one from the seed demo. Only run this command if you are starting a new project or can afford to lose your current data.
-
-## Production
-
-To run Payload in production, you need to build and serve the Admin panel. To do so, follow these steps:
-
-1. Invoke the `payload build` script by running `yarn build` or `npm run build` in your project root. This creates a `./build` directory with a production-ready admin bundle.
-1. Finally run `yarn serve` or `npm run serve` to run Node in production and serve Payload from the `./build` directory.
-1. When you're ready to go live, see [Deployment](#deployment) for more details.
-
-### Deployment
-
-Before deploying your app, you need to:
-
-1. Switch [your Stripe account to live mode](https://stripe.com/docs/test-mode) and update your [Stripe API keys](https://dashboard.stripe.com/test/apikeys). See [Connect Stripe](#connect-stripe) for more details.
-1. Ensure your app builds and serves in production. See [Production](#production) for more details.
